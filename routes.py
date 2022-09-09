@@ -16,7 +16,7 @@ from aiogram.utils.web_app import check_webapp_signature, safe_parse_webapp_init
 
 
 async def demo_handler(request: Request):
-    return FileResponse(Path(__file__).parent.resolve() / "demo.html")
+    return FileResponse(Path(__file__).parent.resolve() / "index.html")
 
 
 async def check_data_handler(request: Request):
