@@ -1,5 +1,6 @@
 import logging
-from os import getenv
+from dotenv import load_dotenv
+import os
 
 from aiohttp.web import run_app
 from aiohttp.web_app import Application
@@ -10,14 +11,15 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import MenuButtonWebApp, WebAppInfo
 from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_application
 
-TELEGRAM_TOKEN = getenv("TELEGRAM_TOKEN")
-APP_BASE_URL = getenv("APP_BASE_URL")
+load_dotenv()
+TELEGRAM_TOKEN = os.getenv('BOT_TOKEN')
+APP_BASE_URL = os.getenv('APP_BASE_URL')
 
 
 async def on_startup(bot: Bot, base_url: str):
     await bot.set_webhook(f"{base_url}/webhook")
     await bot.set_chat_menu_button(
-        menu_button=MenuButtonWebApp(text="Open Menu", web_app=WebAppInfo(url=f"{base_url}/demo"))
+        menu_button=MenuButtonWebApp(text="Open Menu", web_app=WebAppInfo(url=base_url))
     )
 
 
